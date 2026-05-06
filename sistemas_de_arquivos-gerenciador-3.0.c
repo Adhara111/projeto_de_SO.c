@@ -193,7 +193,7 @@ int criarArquivo()
     printf("Conteudo escrito com sucesso!\n");
 }
 
-void adicionarArquivo(char *nome)
+/*void adicionarArquivo(char *nome)
 {
    void adicionarArquivo(char *nome)
 {
@@ -221,4 +221,30 @@ void adicionarArquivo(char *nome)
     fclose(f);
     printf("Conteudo adicionado com sucesso!\n");
 }
+}*/
+void adicionarArquivo(char *nome)
+{
+    FILE *f = fopen(nome, "a");
+    char texto[500];
+
+    if (f == NULL) {
+        printf("Erro ao abrir o arquivo!\n");
+        return;
+    }
+
+    printf("Digite o conteudo para adicionar ('.' para encerrar): \n");
+
+    while(1){
+        fgets(texto, sizeof(texto), stdin);
+        texto[strcspn(texto, "\n")] = 0;
+
+        if(strcmp(texto, ".") == 0){
+            break;
+        }
+
+        fprintf(f, "%s\n", texto);
+    }
+
+    fclose(f);
+    printf("Conteudo adicionado com sucesso!\n");
 }
